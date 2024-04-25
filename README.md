@@ -20,7 +20,7 @@ A estrutura deste repositório é a seguinte:
 
 ## Exploração e Teste
 
-Nesta etapa utilizamos os notebooks para realizarmos a exploração dos dados e em seguida iniciamos testes de modelagem.
+Nesta etapa utilizamos os notebooks para realizarmos a [exploração dos dados](https://nbviewer.org/github/diogolbar/tpv-prediction/blob/master/notebooks/01-EDA.ipynb) e em seguida iniciamos testes de [modelagem](https://nbviewer.org/github/diogolbar/tpv-prediction/blob/master/notebooks/02-Model_Training.ipynb).
 
 ## Criação de Pipelines
 
@@ -30,7 +30,10 @@ Com os rascunhos feitos nos notebooks, podemos partir para a criação dos pipel
 
 - model_tuning: utiliza uma otimização bayesiana baseada em extra trees para otimizar os hiperparâmetros do modelo. Sua entra são os dados processados e a saida é uma lista (pickle) em data/05_model_input/
 
+  ![](model_tuning-pipeline.png)
+
 - model_training: treina um modelo com os hiperparâmetros da etapa anterior e salva um modelo. Sua entrada são os dados processados, os hiperparâmetros da etapa de tuning e a saída é um modelo em data/06_models/
+  ![](model_training-pipeline.png)
 
 ## Melhorias no Modelo
 
@@ -41,7 +44,7 @@ Com base nisso, uma melhoria futura seria a criação de um ou mais modelo de re
 Caso estes novos modelos sejam de fato utilizados, devem ser treinados e retreinados individualmente.
 
 
-## Planejamento para ciclo de MLOps
+## Planejamento para Stack simples de MLOps
 
 1. Ajustes:
     * Versionamento: o versionamento dos dados precisa ser revisto a depdender do tamanho da base que será utilizada. Neste projeto o versionamento foi realizado no próprio Git pois a base utilizada é pequena, para casos em que a base for maiorferramentas como **DVC** podem ser utilizadas.
@@ -59,4 +62,4 @@ Caso estes novos modelos sejam de fato utilizados, devem ser treinados e retrein
         * **Grafana**: Criação de Dashboards personalizados para monitoramento das métricas
         * **Redash**, **Metabase** ou **Superset**: caso algum desses produtos já seja utilizado, é possível personalizarmos dashboards neles para que possamos acompanhar as métricas desejadas dos nossos modelos.
 
-
+ ![](MLOPS-Stone.png)
