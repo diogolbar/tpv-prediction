@@ -7,7 +7,7 @@ Este projeto faz parte de um case realizado para preenchimento de uma vaga de Da
 A estrutura deste repositório é a seguinte:
 
 - conf: Inclui as configurações básicas do projeto (arquivos YML). Aqui fica o catálogo de todos os dados e parâmetros que serão utilizados nos pipelines.
-- data: Armazena os dados utilizados no projeto ao longo de todas as etapas. Métricas, modelos e hiperparâmetros também são guardados aqui. 
+- data: Armazena os dados utilizados no projeto ao longo de todas as etapas. Métricas, modelos e hiperparâmetros também são guardados aqui. Os dados brutos devem ficar em data/01_raw
 - notebooks: onde os notebooks com testes e rascunhos são armazenados
 - src: local onde são armazenados e organizados os pipelines do Kedro:
     * Cada pipeline possui um conjunto de nodes e pipelines. Neste projeto em particular criamos os seguintes:
@@ -24,7 +24,7 @@ Nesta etapa utilizamos os notebooks para realizarmos a [exploração dos dados](
 
 ## Criação de Pipelines
 
-Com os rascunhos feitos nos notebooks, podemos partir para a criação dos pipelines:
+Com os rascunhos feitos nos notebooks, podemos partir para a criação dos pipelines :
 
 - data_processing: este pipeline realiza os mesmos passos que foram realizados no processo de testes. Sua entrada são os dados brutos e a saída são os dados já devidamente processados em data/03_primary/
 
