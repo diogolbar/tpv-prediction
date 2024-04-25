@@ -1,0 +1,22 @@
+# This is a boilerplate parameters config generated for pipeline 'data_processing'
+# using Kedro 0.19.5.
+#
+# Documentation for this file format can be found in "Parameters"
+# Link: https://docs.kedro.org/en/0.19.5/configuration/parameters.html
+model_options:
+  val_frac: 0.7
+  random_state: 42
+  target:
+    - stone_tpv_acquirer_total
+  stratify: True
+  categorical_list:
+    - cnae_fiscal_principal
+    - segmento
+    - uf
+    - mei
+    - mcc
+    - subsegmento
+    - porte
+    - faixa_empregados
+    - tier
+    - municipio+bairro

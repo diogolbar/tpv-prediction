@@ -1,0 +1,21 @@
+kedro==0.19.5
+kedro_viz==9.0.0
+lightgbm==4.3.0
+matplotlib==3.7.5
+numpy==1.22.3
+pandas==1.4.2
+pytest==7.4.4
+scikit_learn==1.4.2
+scikit_optimize==0.10.1
+scipy==1.8.0
+shap==0.44.1
+ipython>=8.10
+jupyterlab>=3.0
+kedro-datasets[pandas-csvdataset, pandas-exceldataset, pandas-parquetdataset, plotly-plotlydataset, plotly-jsondataset, matplotlib-matplotlibwriter]>=3.0; python_version >= "3.9"
+kedro-datasets[pandas.CSVDataset, pandas.ExcelDataset, pandas.ParquetDataset, plotly.PlotlyDataset, plotly.JSONDataset, matplotlib.MatplotlibWriter]>=1.0; python_version < "3.9"
+kedro-telemetry>=0.3.1
+notebook
+pytest-cov~=3.0
+pytest-mock>=1.7.1, <2.0
+ruff~=0.1.8
+seaborn~=0.12.1

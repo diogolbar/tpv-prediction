@@ -1,0 +1,25 @@
+
+
+raw_data:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/data.csv
+
+processed_data:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/processed_data.pq
+
+hyperparameters:
+  type: pickle.PickleDataset
+  filepath: data/05_model_input/hyperparameters.pickle
+  backend: joblib
+
+classifier:
+  type: pickle.PickleDataset
+  filepath: data/06_models/classifier.pickle
+  backend: joblib
+  versioned: true
+
+metrics:
+  type: tracking.MetricsDataset
+  filepath: data/09_tracking/metrics.json
+  versioned: true
