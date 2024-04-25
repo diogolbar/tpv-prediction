@@ -1,99 +1,62 @@
-# tpv_prediction
+# Case Stone
 
-## Overview
+## Visão Geral
 
-This is your new Kedro project with Kedro-Viz setup, which was generated using `kedro 0.19.0`.
+Este projeto faz parte de um case realizado para preenchimento de uma vaga de Data Science da Stone. O foco é conseguir realizar a previsão da TPV de adquirência com a base de dados disponibilizada.
 
-Take a look at the [Kedro documentation](https://docs.kedro.org) to get started.
+A estrutura deste repositório é a seguinte:
 
-## Rules and guidelines
+- conf: Inclui as configurações básicas do projeto (arquivos YML). Aqui fica o catálogo de todos os dados e parâmetros que serão utilizados nos pipelines.
+- data: Armazena os dados utilizados no projeto ao longo de todas as etapas. Métricas, modelos e hiperparâmetros também são guardados aqui. 
+- notebooks: onde os notebooks com testes e rascunhos são armazenados
+- src: local onde são armazenados e organizados os pipelines do Kedro:
+    * Cada pipeline possui um conjunto de nodes e pipelines. Neste projeto em particular criamos os seguintes:
+        - data_processing
+        - model_tuning
+        - model_training
+    * Com o comando
+    <code>kedro run --pipeline nome_do_pipeline</code> podemos usar cada pipeline separadamente.
 
-In order to get the best out of the template:
 
-* Don't remove any lines from the `.gitignore` file we provide
-* Make sure your results can be reproduced by following a [data engineering convention](https://docs.kedro.org/en/stable/faq/faq.html#what-is-data-engineering-convention)
-* Don't commit data to your repository
-* Don't commit any credentials or your local configuration to your repository. Keep all your credentials and local configuration in `conf/local/`
+## Exploração e Teste
 
-## How to install dependencies
+Nesta etapa utilizamos os notebooks para realizarmos a exploração dos dados e em seguida iniciamos testes de modelagem.
 
-Declare any dependencies in `requirements.txt` for `pip` installation.
+## Criação de Pipelines
 
-To install them, run:
+Com os rascunhos feitos nos notebooks, podemos partir para a criação dos pipelines:
 
-```
-pip install -r requirements.txt
-```
+- data_processing: este pipeline realiza os mesmos passos que foram realizados no processo de testes. Sua entrada são os dados brutos e a saída são os dados já devidamente processados em data/03_primary/
 
-## How to run your Kedro pipeline
+- model_tuning: utiliza uma otimização bayesiana baseada em extra trees para otimizar os hiperparâmetros do modelo. Sua entra são os dados processados e a saida é uma lista (pickle) em data/05_model_input/
 
-You can run your Kedro project with:
+- model_training: treina um modelo com os hiperparâmetros da etapa anterior e salva um modelo. Sua entrada são os dados processados, os hiperparâmetros da etapa de tuning e a saída é um modelo em data/06_models/
 
-```
-kedro run
-```
+## Melhorias no Modelo
 
-## How to test your Kedro project
+O escopo do projeto foi modificado para um classificador para multiclasses, que permite que consigamos predizer intervalos de valor da TPV ao invés de um valor contínuo com um pouco mais de segurança.
 
-Have a look at the files `src/tests/test_run.py` and `src/tests/pipelines/data_science/test_pipeline.py` for instructions on how to write your tests. Run the tests as follows:
+Com base nisso, uma melhoria futura seria a criação de um ou mais modelo de regressão que será alimentado com as variáveis previstas pelo classificador.
 
-```
-pytest
-```
+Caso estes novos modelos sejam de fato utilizados, devem ser treinados e retreinados individualmente.
 
-To configure the coverage threshold, look at the `.coveragerc` file.
 
-## Project dependencies
+## Planejamento para ciclo de MLOps
 
-To see and update the dependency requirements for your project use `requirements.txt`. Install the project requirements with `pip install -r requirements.txt`.
+1. Ajustes:
+    * Versionamento: o versionamento dos dados precisa ser revisto a depdender do tamanho da base que será utilizada. Neste projeto o versionamento foi realizado no próprio Git pois a base utilizada é pequena, para casos em que a base for maiorferramentas como **DVC** podem ser utilizadas.
+    * Tracking: O tracking geral de experimentos, artefatos e modelos pode ser realizado com o **MLFlow**
+    * Orquestração: 
+        * Pipelines de dados: para pipelins mais complexos poderiamos utilizar o **Airflow** ou alguma ferramenta equivalente
+        * CI/CD: Também pode ser realizada via **Github Actions** combinando com as facilidades do **Kedro**
+1. Implantação em Produção:
+    * Criaçãod e uma **API** para receber requisições:  
+    * Utilização de **Docker** para containerizar os modelos
+    * Utilização de **Kubernetes** em um serviço de nuvem como **Google Kubernetes Engine** para realizar o deploy do container
+2. Monitoramento dos Modelos:
+    * Para monitoramento dos modelos podemos utilizar ferramentas como:
+        * **Prometheus**: Para monitoramento e alertas (pode ser combinado com o Grafana)
+        * **Grafana**: Criação de Dashboards personalizados para monitoramento das métricas
+        * **Redash**, **Metabase** ou **Superset**: caso algum desses produtos já seja utilizado, é possível personalizarmos dashboards neles para que possamos acompanhar as métricas desejadas dos nossos modelos.
 
-[Further information about project dependencies](https://docs.kedro.org/en/stable/kedro_project_setup/dependencies.html#project-specific-dependencies)
 
-## How to work with Kedro and notebooks
-
-> Note: Using `kedro jupyter` or `kedro ipython` to run your notebook provides these variables in scope: `catalog`, `context`, `pipelines` and `session`.
->
-> Jupyter, JupyterLab, and IPython are already included in the project requirements by default, so once you have run `pip install -r requirements.txt` you will not need to take any extra steps before you use them.
-
-### Jupyter
-To use Jupyter notebooks in your Kedro project, you need to install Jupyter:
-
-```
-pip install jupyter
-```
-
-After installing Jupyter, you can start a local notebook server:
-
-```
-kedro jupyter notebook
-```
-
-### JupyterLab
-To use JupyterLab, you need to install it:
-
-```
-pip install jupyterlab
-```
-
-You can also start JupyterLab:
-
-```
-kedro jupyter lab
-```
-
-### IPython
-And if you want to run an IPython session:
-
-```
-kedro ipython
-```
-
-### How to ignore notebook output cells in `git`
-To automatically strip out all output cell contents before committing to `git`, you can use tools like [`nbstripout`](https://github.com/kynan/nbstripout). For example, you can add a hook in `.git/config` with `nbstripout --install`. This will run `nbstripout` before anything is committed to `git`.
-
-> *Note:* Your output cells will be retained locally.
-
-[Further information about using notebooks for experiments within Kedro projects](https://docs.kedro.org/en/develop/notebooks_and_ipython/kedro_and_notebooks.html).
-## Package your Kedro project
-
-[Further information about building project documentation and packaging your project](https://docs.kedro.org/en/stable/tutorial/package_a_project.html).

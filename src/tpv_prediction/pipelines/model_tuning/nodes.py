@@ -73,7 +73,7 @@ def optimize_model(X_train: pd.DataFrame, X_val:pd.DataFrame, y_train:pd.Series,
                 (0,5)]#gammal]
     
 
-    res = forest_minimize(tune_lgbm, space, random_state=42, n_random_starts=5, n_calls=10, verbose=0)
+    res = forest_minimize(tune_lgbm, space, random_state=42, n_random_starts=10, n_calls=100, verbose=0)
     best_params = res.x
 
     return best_params
