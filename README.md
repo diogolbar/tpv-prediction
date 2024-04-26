@@ -47,13 +47,13 @@ Caso estes novos modelos sejam de fato utilizados, devem ser treinados e retrein
 ## Planejamento para Stack simples de MLOps
 
 1. Ajustes:
-    * Versionamento: o versionamento dos dados precisa ser revisto a depdender do tamanho da base que será utilizada. Neste projeto o versionamento foi realizado no próprio Git pois a base utilizada é pequena, para casos em que a base for maiorferramentas como **DVC** podem ser utilizadas.
+    * Versionamento: o versionamento dos dados precisa ser revisto a depdender do tamanho da base que será utilizada. Neste projeto o versionamento foi realizado no próprio **Git** combinado com as funcionalidades do **Kedro** pois a base utilizada é pequena, para casos em que a base for maiorferramentas como **DVC** podem ser utilizadas.
     * Tracking: O tracking geral de experimentos, artefatos e modelos pode ser realizado com o **MLFlow**
     * Orquestração: 
         * Pipelines de dados: para pipelins mais complexos poderiamos utilizar o **Airflow** ou alguma ferramenta equivalente
         * CI/CD: Também pode ser realizada via **Github Actions** combinando com as facilidades do **Kedro**
 1. Implantação em Produção:
-    * Criaçãod e uma **API** para receber requisições:  
+    * Criaçãod de uma API para receber requisições:  
     * Utilização de **Docker** para containerizar os modelos
     * Utilização de **Kubernetes** em um serviço de nuvem como **Google Kubernetes Engine** para realizar o deploy do container
 2. Monitoramento dos Modelos:
