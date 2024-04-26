@@ -17,8 +17,10 @@ data/**
 # also keep all .gitkeep files
 !.gitkeep
 
-# keep also the example dataset
-#!data/01_raw/*
+# keep also these datasets
+!data/05_model_input/*
+!data/06_models/*
+!data/09_tracking/*
 
 
 
