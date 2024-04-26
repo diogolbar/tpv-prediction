@@ -2,7 +2,7 @@
 
 ## Visão Geral
 
-Este projeto faz parte de um case realizado para preenchimento de uma vaga de Data Science da Stone. O foco é conseguir realizar a previsão da TPV de adquirência com a base de dados disponibilizada.
+Este projeto faz parte de um case realizado para preenchimento de uma vaga de Data Science da Stone. O foco é conseguir realizar a [previsão do TPV](https://github.com/diogolbar/tpv-prediction/blob/master/test.ipynb) de adquirência com a base de dados disponibilizada.
 
 A estrutura deste repositório é a seguinte:
 
