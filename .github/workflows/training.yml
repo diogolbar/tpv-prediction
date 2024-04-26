@@ -1,0 +1,38 @@
+name: Model Retrain
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Runs at midnight (00:00) every Sunday
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up environment
+        run: |
+          python -m venv venv
+          
+
+      - name: Install requirements
+        run: |
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install setuptools
+          pip install kedro
+          pip install -r requirements.txt
+        working-directory: ${{ github.workspace }}
+
+      - name: Run kedro
+        run: |
+          source venv/bin/activate
+          kedro run --pipeline=model_training
+        working-directory: ${{ github.workspace }}
