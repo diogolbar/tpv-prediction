@@ -13,8 +13,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      
-      - name: Prepare environment
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up environment
         run: |
           python -m venv venv
           source venv/bin/activate
@@ -24,6 +27,7 @@ jobs:
       - name: Install requirements
         run: |
           pip install -r requirements.txt
-      
+        working-directory: ${{ github.workspace }}
+
       - name: Run kedro
         run: kedro run --pipeline=model_training
