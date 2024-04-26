@@ -1,0 +1,28 @@
+name: Weekly Pipeline Run
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Runs at midnight (00:00) every Sunday
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      
+      - name: Prepare environment
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install kedro
+
+      - name: Install requirements
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Run kedro
+        run: kedro run --pipeline=model_training
