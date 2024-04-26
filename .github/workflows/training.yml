@@ -1,4 +1,4 @@
-name: Weekly Pipeline Run
+name: Model Retrain
 
 on:
   schedule:
