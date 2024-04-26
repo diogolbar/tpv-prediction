@@ -30,5 +30,6 @@ jobs:
 
       - name: Run kedro
         run: |
+          source venv/bin/activate
           kedro run --pipeline=model_training
         working-directory: ${{ github.workspace }}
