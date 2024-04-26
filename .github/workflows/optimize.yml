@@ -26,11 +26,11 @@ jobs:
         run: |
           source venv/bin/activate
           pip install -r requirements.txt
+          pip install kedro
         working-directory: ${{ github.workspace }}
 
       - name: Run kedro
         run: |
-          source venv/bin/activate
           kedro run --pipeline=data_processing
           kedro run --pipeline=model_tuning
         working-directory: ${{ github.workspace }}
