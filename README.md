@@ -30,11 +30,10 @@ Com os rascunhos feitos nos notebooks, podemos partir para a criação dos pipel
 
 - model_tuning: utiliza uma otimização bayesiana baseada em extra trees para otimizar os hiperparâmetros do modelo. Sua entra são os dados processados e a saida é uma lista (pickle) em data/05_model_input/
 
-  ![](model_tuning-pipeline.png)
+    <img src="model_tuning-pipeline.png" alt="drawing" width="500"/>
 
 - model_training: treina um modelo com os hiperparâmetros da etapa anterior e salva um modelo. Sua entrada são os dados processados, os hiperparâmetros da etapa de tuning e a saída é um modelo em data/06_models/
-  ![](model_training-pipeline.png)
-
+    <img src="model_training-pipeline.png" alt="drawing" width="500"/>
 ## Melhorias no Modelo
 
 O escopo do projeto foi modificado para um classificador para multiclasses, que permite que consigamos predizer intervalos de valor da TPV ao invés de um valor contínuo com um pouco mais de segurança.
