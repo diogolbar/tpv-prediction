@@ -18,10 +18,10 @@ data/**
 !.gitkeep
 
 # keep also these datasets
-
+!data/03_primary/*
 !data/05_model_input/*
-
-
+!data/06_models/*
+!data/09_metrics/*
 ##########################
 # Common files
 

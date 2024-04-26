@@ -22,4 +22,3 @@ classifier:
 metrics:
   type: tracking.MetricsDataset
   filepath: data/09_tracking/metrics.json
-  versioned: true
