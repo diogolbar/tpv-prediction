@@ -17,9 +17,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up environment
+      - name: Install distutils
         run: |
           sudo apt-get install python3-distutils -y
+
+      - name: Update distutils
+        run: |
+          pip install --upgrade distutils
+
+      - name: Set up environment
+        run: |
           python -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
