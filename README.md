@@ -20,7 +20,7 @@ A estrutura deste repositório é a seguinte:
 
 ## Exploração e Teste
 
-Nesta etapa utilizamos os notebooks para realizarmos a [exploração dos dados](https://github.com/diogolbar/tpv-prediction/blob/master/notebooks/01-EDA.ipynb) e em seguida iniciamos testes de [modelagem](https://github.com/diogolbar/tpv-prediction/blob/master/notebooks/02-Model_Training.ipynb).
+Nesta etapa utilizamos os notebooks para realizarmos a [exploração dos dados](https://nbviewer.org/github/diogolbar/tpv-prediction/blob/master/notebooks/01-EDA.ipynb) e em seguida iniciamos testes de [modelagem](https://nbviewer.org/github/diogolbar/tpv-prediction/blob/master/notebooks/02-Model_Training.ipynb).
 
 ## Criação de Pipelines
 
