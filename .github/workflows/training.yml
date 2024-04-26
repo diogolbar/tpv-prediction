@@ -1,4 +1,4 @@
-name: Model Retrain
+name: Train Model
 
 on:
   schedule:
