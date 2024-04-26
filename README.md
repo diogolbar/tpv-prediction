@@ -20,7 +20,7 @@ A estrutura deste repositório é a seguinte:
 
 ## Exploração e Teste
 
-Nesta etapa utilizamos os notebooks para realizarmos a [exploração dos dados](https://nbviewer.org/github/diogolbar/tpv-prediction/blob/master/notebooks/01-EDA.ipynb) e em seguida iniciamos testes de [modelagem](https://nbviewer.org/github/diogolbar/tpv-prediction/blob/master/notebooks/02-Model_Training.ipynb).
+Nesta etapa utilizamos os notebooks para realizarmos a [exploração dos dados](https://github.com/diogolbar/tpv-prediction/blob/master/notebooks/01-EDA.ipynb) e em seguida iniciamos testes de [modelagem](https://github.com/diogolbar/tpv-prediction/blob/master/notebooks/02-Model_Training.ipynb).
 
 ## Criação de Pipelines
 
@@ -32,7 +32,7 @@ Com os rascunhos feitos nos notebooks, podemos partir para a criação dos pipel
 
     <img src="model_tuning-pipeline.png" alt="drawing" width="500"/>
 
-- model_training: treina um modelo com os hiperparâmetros da etapa anterior e salva um modelo. Sua entrada são os dados processados, os hiperparâmetros da etapa de tuning e a saída é um modelo em data/06_models/
+- model_training: treina um modelo com os hiperparâmetros da etapa anterior e salva um modelo. Sua entrada são os dados processados, os hiperparâmetros da etapa de tuning e a saída é um modelo em data/06_models/ e as métricas resultantes em data/09_tracking
     <img src="model_training-pipeline.png" alt="drawing" width="500"/>
 ## Melhorias no Modelo
 
@@ -46,11 +46,11 @@ Caso estes novos modelos sejam de fato utilizados, devem ser treinados e retrein
 ## Planejamento para Stack simples de MLOps
 
 1. Ajustes:
-    * Versionamento: o versionamento dos dados precisa ser revisto a depdender do tamanho da base que será utilizada. Neste projeto o versionamento foi realizado no próprio **Git** combinado com as funcionalidades do **Kedro** pois a base utilizada é pequena, para casos em que a base for maiorferramentas como **DVC** podem ser utilizadas.
+    * Versionamento: o versionamento dos dados precisa ser revisto a depdender do tamanho da base que será utilizada. Neste projeto o versionamento foi realizado no próprio **Git** combinado com as funcionalidades do **Kedro** pois a base utilizada é pequena, para casos em que a base for maior ferramentas como **DVC** podem ser utilizadas.
     * Tracking: O tracking geral de experimentos, artefatos e modelos pode ser realizado com o **MLFlow**
     * Orquestração: 
         * Pipelines de dados: para pipelins mais complexos poderiamos utilizar o **Airflow** ou alguma ferramenta equivalente
-        * CI/CD: Também pode ser realizada via **Github Actions** combinando com as facilidades do **Kedro**
+        * CI/CD: Também pode ser realizada via [**Github Actions**](https://github.com/diogolbar/tpv-prediction/actions) combinando com as facilidades do **Kedro**
 1. Implantação em Produção:
     * Criaçãod de uma API para receber requisições:  
     * Utilização de **Docker** para containerizar os modelos
