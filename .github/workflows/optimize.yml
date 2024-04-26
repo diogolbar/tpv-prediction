@@ -2,7 +2,7 @@ name: Optimize Model
 
 on:
   schedule:
-    - cron: '0 0 * * 0'  # Runs at midnight (00:00) every Sunday
+    - cron: '0 0 1 * *'  # Runs at midnight (00:00) every day of month 1
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
