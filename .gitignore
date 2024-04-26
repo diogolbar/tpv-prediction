@@ -18,8 +18,11 @@ data/**
 !.gitkeep
 
 # keep also these datasets
+
 !data/05_model_input/*
+
 !data/06_models/*
+
 !data/09_tracking/*
 
 
