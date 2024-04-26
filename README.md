@@ -6,7 +6,7 @@ Este projeto faz parte de um case realizado para preenchimento de uma vaga de Da
 
 A estrutura deste repositório é a seguinte:
 
-- conf: Inclui as configurações básicas do projeto (arquivos YML). Aqui fica o catálogo de todos os dados e parâmetros que serão utilizados nos pipelines.
+- conf: Inclui as configurações básicas do projeto (arquivos YML) e ambientes (base e local). Aqui ficam o catálogo de todos os dados e parâmetros que serão utilizados nos pipelines.
 - data: Armazena os dados utilizados no projeto ao longo de todas as etapas. Métricas, modelos e hiperparâmetros também são guardados aqui. Os dados brutos devem ficar em data/01_raw
 - notebooks: onde os notebooks com testes e rascunhos são armazenados
 - src: local onde são armazenados e organizados os pipelines do Kedro:
@@ -59,6 +59,6 @@ Caso estes novos modelos sejam de fato utilizados, devem ser treinados e retrein
     * Para monitoramento dos modelos podemos utilizar ferramentas como:
         * **Prometheus**: Para monitoramento e alertas (pode ser combinado com o Grafana)
         * **Grafana**: Criação de Dashboards personalizados para monitoramento das métricas
-        * **Redash**, **Metabase** ou **Superset**: caso algum desses produtos já seja utilizado, é possível personalizarmos dashboards neles para que possamos acompanhar as métricas desejadas dos nossos modelos.
+        * **Metabase** ou **Superset**: caso algum desses produtos já seja utilizado, é possível personalizarmos dashboards neles para que possamos acompanhar as métricas desejadas dos nossos modelos.
 
  ![](MLOPS-Stone.png)
