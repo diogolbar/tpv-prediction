@@ -21,11 +21,6 @@ data/**
 
 !data/05_model_input/*
 
-!data/06_models/*
-
-!data/09_tracking/*
-
-
 
 ##########################
 # Common files
