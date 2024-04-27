@@ -1,4 +1,7 @@
 import matplotlib.pyplot as plt
+
+import pandas as pd
+
 import shap
 
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error, accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
@@ -82,3 +85,9 @@ def split_data(df, target_column, train_frac = 0.7, val_frac = 0.5, stratified=F
     y_test = test[target_column]
     
     return X, X_train, X_val, X_test, y, y_train, y_val, y_test
+
+def validation(X,y,model, name,multi=False):
+    return pd.DataFrame(model.check_predict(X,y,multi), index=[name])
+
+def compare_results(val,test):
+    return pd.concat([val,test])

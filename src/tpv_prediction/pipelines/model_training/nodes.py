@@ -6,14 +6,10 @@ import logging
 from typing import Dict, Tuple, List
 
 import pandas as pd
-import numpy as np
 
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
 from lightgbm import LGBMClassifier
 from sklearn.metrics import f1_score, precision_score, recall_score, roc_auc_score
-
-from skopt import forest_minimize
 
 
 def split_data(data: pd.DataFrame, parameters: Dict) -> Tuple:
