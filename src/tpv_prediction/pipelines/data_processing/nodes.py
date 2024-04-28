@@ -12,6 +12,16 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder
 
 def preprocess_data(data:pd.DataFrame, parameters:Dict) -> pd.DataFrame:
+    """
+    Preprocesses the input DataFrame `data` according to the specified `parameters`.
+
+    Args:
+        data (pd.DataFrame): The input DataFrame containing the data to be processed.
+        parameters (Dict): A dictionary containing the parameters used for data processing.
+
+    Returns:
+        pd.DataFrame: The preprocessed DataFrame.
+    """
     
     data['municipio']=data['municipio'].str.replace(' ','_')
     data['bairro']=data['bairro'].str.replace(' ','_')
