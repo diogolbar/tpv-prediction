@@ -2,21 +2,21 @@
 
 ## 1. Visão Geral
 
-Este projeto faz parte de um case realizado para preenchimento de uma vaga de Data Science da Stone. O foco é conseguir realizar a [previsão do TPV](https://github.com/diogolbar/tpv-prediction/blob/master/test.ipynb) de adquirência com a base de dados disponibilizada.
+Este projeto faz parte de um case realizado para o processo seletivo de Data Science da Stone. O foco é conseguir realizar a [previsão do TPV](https://github.com/diogolbar/tpv-prediction/blob/master/test.ipynb) de adquirência com a base de dados disponibilizada.
 
 A estrutura deste repositório é a padrão do [Kedro](https://kedro.org/) e tem o seguinte conteúdo:
 
 - conf: Inclui as configurações básicas do projeto (arquivos YML) e ambientes (base e local). Aqui ficam o catálogo de todos os dados e parâmetros que serão utilizados nos pipelines.
-- data: Armazena os dados utilizados no projeto ao longo de todas as etapas. Métricas, modelos e hiperparâmetros também são guardados aqui. Os dados brutos devem ficar em data/01_raw
+- data: Armazena os dados utilizados no projeto ao longo de todas as etapas. Métricas, modelos e hiperparâmetros também são guardados aqui. O CSV com os dados brutos deve ficar em data/01_raw, mas não está disponíveis neste repositíro
 - notebooks: onde os notebooks com testes e rascunhos são armazenados
 - src: local onde são armazenados e organizados os pipelines do Kedro:
-    * Cada pipeline possui um conjunto de nodes e pipelines. Neste projeto em particular criamos os seguintes:
-        - data_processing
-        - model_tuning
-        - model_training
+    * Cada pipeline possui um conjunto de **nodes** (funções) e **pipelines**. Neste projeto em particular criamos:
+        - **data_processing**
+        - **model_tuning**
+        - **model_training**
 
 Extra:
-- .github: esta pasta armazena dois workflows funcionais do [Github Actions](https://docs.github.com/pt/actions).
+- .github: este diretório armazena dois workflows funcionais do [Github Actions](https://docs.github.com/pt/actions).
 
 
 ## 2. Exploração e Teste
@@ -29,12 +29,13 @@ Com os rascunhos feitos nos notebooks, criamos os seguintes pipelines:
 
 - **data_processing**: este pipeline realiza os mesmos passos que foram realizados no processo de testes. Sua entrada são os dados brutos e a saída são os dados já devidamente processados em data/03_primary/
 
-- **model_tuning**: utiliza uma otimização bayesiana baseada em extra trees para otimizar os hiperparâmetros do modelo. Sua entra são os dados processados e a saida é uma lista (pickle) em data/05_model_input/
+- **model_tuning**: utiliza uma otimização bayesiana baseada em extra trees para otimizar os hiperparâmetros do modelo. Sua entrada são os dados processados e a saida é uma lista em data/05_model_input/
 
-    <img src="model_tuning-pipeline.png" alt="drawing" width="500"/>
+  <img src="model_tuning-pipeline.png" alt="drawing" width="500"/>
 
-- m**odel_training**: treina um modelo com os hiperparâmetros da etapa anterior e salva um modelo. Sua entrada são os dados processados, os hiperparâmetros da etapa de tuning e a saída é um modelo em data/06_models/ e as métricas resultantes em data/09_tracking
-    <img src="model_training-pipeline.png" alt="drawing" width="500"/>
+- **model_training**: treina um modelo com os hiperparâmetros da etapa anterior, salva o modelo e em seguida o avalia e salva as métricas de avaliação. Sua entrada são os dados processados, os hiperparâmetros da etapa de tuning e a saída é um modelo em data/06_models/ e as métricas resultantes em data/09_tracking
+
+  <img src="model_training-pipeline.png" alt="drawing" width="500"/>
 
 
 ## 4. Implantação
@@ -64,7 +65,7 @@ Caso estes novos modelos sejam de fato utilizados, poderão ser treinados e retr
         * **CI/CD**: pode ser realizada via [**Github Actions**](https://github.com/diogolbar/tpv-prediction/actions) combinando com as facilidades do **Kedro**
 
 1. **Implantação em Produção:**
-    * Criação de um web app para receber requisições:  
+    * Criação de uma **API** para receber requisições:  
     * Utilização de **Docker** para containerizar os modelos
     * Utilização de **Kubernetes** em um serviço de nuvem como **Google Kubernetes Engine** para realizar o deploy do container
 2. **Monitoramento dos Modelos:**
