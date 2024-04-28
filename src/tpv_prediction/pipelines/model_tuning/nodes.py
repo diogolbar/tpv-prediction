@@ -14,7 +14,17 @@ from skopt import forest_minimize
 
 
 def split_data(data: pd.DataFrame, parameters: Dict) -> Tuple:
+    """
+    Splits the input DataFrame `data` into training and validation sets.
 
+    Args:
+        data (pd.DataFrame): The input DataFrame containing the data to be split.
+        parameters (Dict): A dictionary containing the parameters used for splitting.
+
+    Returns:
+        Tuple: A tuple containing X_train, X_val, y_train, and y_val.
+    """
+    
     X = data.drop(columns = 'target_class')
     y = data['target_class']
 
@@ -30,8 +40,19 @@ def split_data(data: pd.DataFrame, parameters: Dict) -> Tuple:
 
 def optimize_model(X_train: pd.DataFrame, X_val:pd.DataFrame, y_train:pd.Series, y_val:pd.Series, parameters:Dict
 ) -> List:
+    """
+    Optimizes hyperparameters for a LightGBM model using Bayesian optimization.
 
+    Args:
+        X_train (pd.DataFrame): The input DataFrame containing the features for training.
+        X_val (pd.DataFrame): The input DataFrame containing the features for validation.
+        y_train (pd.Series): The input Series containing the target variable for training.
+        y_val (pd.Series): The input Series containing the target variable for validation.
+        parameters (Dict): A dictionary containing the parameters used for optimization.
 
+    Returns:
+        List: A list containing the best hyperparameters found by the optimization process.
+    """
     def tune_lgbm(params):
     
         lr = params[0]
@@ -67,7 +88,7 @@ def optimize_model(X_train: pd.DataFrame, X_val:pd.DataFrame, y_train:pd.Series,
                 (100,1000),# n_estimator
                 (1e-6,1, 'log-uniform'), #reg_alpha
                 (1e-6,1, 'log-uniform'),#reg_lambda
-                (0,5)]#gammal]
+                (0,5)] #gamma
     
 
     res = forest_minimize(tune_lgbm, space, random_state=42, n_random_starts=10, n_calls=100, verbose=0)
