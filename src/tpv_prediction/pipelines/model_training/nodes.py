@@ -13,7 +13,17 @@ from sklearn.metrics import f1_score, precision_score, recall_score, roc_auc_sco
 
 
 def split_data(data: pd.DataFrame, parameters: Dict) -> Tuple:
+    """
+    Splits the input DataFrame `data` into training and validation sets.
 
+    Args:
+        data (pd.DataFrame): The input DataFrame containing the data to be split.
+        parameters (Dict): A dictionary containing the parameters used for splitting.
+
+    Returns:
+        Tuple: A tuple containing X_train, X_val, y_train, and y_val.
+    """
+    
     X = data.drop(columns = 'target_class')
     y = data['target_class']
 
@@ -28,6 +38,17 @@ def split_data(data: pd.DataFrame, parameters: Dict) -> Tuple:
 
 
 def train_model(X_train: pd.DataFrame, y_train: pd.Series, hyperparameters: List) -> LGBMClassifier:
+    """
+    Trains a LightGBM model on the input training data.
+
+    Args:
+        X_train (pd.DataFrame): The input DataFrame containing the features for training.
+        y_train (pd.Series): The input Series containing the target variable for training.
+        hyperparameters (List): A list of hyperparameters for the LightGBM model.
+
+    Returns:
+        LGBMClassifier: The trained LightGBM classifier.
+    """
     
     best_params = hyperparameters
 
@@ -56,7 +77,18 @@ def train_model(X_train: pd.DataFrame, y_train: pd.Series, hyperparameters: List
 def evaluate_model(
     classifier: LGBMClassifier, X_test: pd.DataFrame, y_test: pd.Series
 ) -> Dict[str, float]:
+    """
+    Evaluates the trained model on the test data and returns evaluation metrics.
 
+    Args:
+        classifier (LGBMClassifier): The trained LightGBM classifier.
+        X_test (pd.DataFrame): The input DataFrame containing the features for testing.
+        y_test (pd.Series): The input Series containing the target variable for testing.
+
+    Returns:
+        Dict[str, float]: A dictionary containing evaluation metrics (F1 score, precision, recall, ROC AUC).
+    """
+    
     y_pred = classifier.predict(X_test)
     f1 = f1_score(y_test, y_pred, average='weighted')
     precision = precision_score(y_test, y_pred, average='weighted')
