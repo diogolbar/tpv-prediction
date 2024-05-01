@@ -33,6 +33,5 @@ jobs:
       - name: Run kedro
         run: |
           source venv/bin/activate
-          kedro run --pipeline=data_processing
-          kedro run --pipeline=model_tuning
+          kedro run --nodes=optimize_model
         working-directory: ${{ github.workspace }}

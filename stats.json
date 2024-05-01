@@ -1,1 +1,1 @@
-{"processed_data": {"rows": 100000, "columns": 14, "file_size": 1115994}, "X_train": {"rows": 70000, "columns": 13}, "X_val": {"rows": 30000, "columns": 13}}
+{"X_val": {"rows": 30000, "columns": 13, "file_size": 3121102}}
