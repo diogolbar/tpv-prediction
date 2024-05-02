@@ -18,12 +18,6 @@ from sklearn.model_selection import learning_curve
 from sklearn.model_selection import LearningCurveDisplay
 from sklearn.model_selection import train_test_split
 
-from scipy import stats
-from sklearn.feature_selection import mutual_info_classif
-from sklearn.preprocessing import LabelEncoder
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import OneHotEncoder
-
 
 class ModelTrainer:
     def __init__(self, model):
@@ -50,7 +44,7 @@ class ModelTrainer:
             precision = precision_score(y, y_pred, average="weighted")
             recall = recall_score(y, y_pred, average="weighted")
             f1 = f1_score(y, y_pred, average="weighted")
-            if multi == False:
+            if multi is False:
                 roc_auc = roc_auc_score(y, p, average="weighted")
             else:
                 roc_auc = roc_auc_score(
@@ -81,7 +75,7 @@ class ModelTrainer:
 
         try:
             explainer = shap.TreeExplainer(self.model)
-        except:
+        except ImportError:
             print("Model type not supported for interpretation")
             return
 
@@ -103,14 +97,15 @@ class ModelTrainer:
         plt.show()
 
 
-def split_data(df, target_column, train_frac=0.7, val_frac=0.5, stratified=False):
+def split_data(df, target_column, train_frac=0.7, val_frac=0.5,
+               stratified=False):
     train = df.sample(frac=train_frac, random_state=42)
     test = df.drop(train.index)
 
     X = train.drop(columns=target_column)
     y = train[target_column]
 
-    if stratified == True:
+    if stratified is True:
         X_train, X_val, y_train, y_val = train_test_split(
             X, y, train_size=val_frac, random_state=42, stratify=y
         )
