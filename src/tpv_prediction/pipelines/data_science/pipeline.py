@@ -1,7 +1,6 @@
 from kedro.pipeline import Pipeline, node, pipeline
 
-from .nodes import optimize_model,train_model, predict
-
+from .nodes import optimize_model,train_model
 
 def create_pipeline(**kwargs) -> Pipeline:
     return pipeline(
@@ -16,12 +15,6 @@ def create_pipeline(**kwargs) -> Pipeline:
                 inputs=["X_train", "y_train", "hyperparameters"],
                 outputs="classifier",
                 name="train_model_node",
-            ),
-            node(
-            func=predict,
-            inputs=["classifier", "X_val"],
-            outputs=["predictions","predictions_proba"],
-            name="predict_node"
             ),
         ]
     )

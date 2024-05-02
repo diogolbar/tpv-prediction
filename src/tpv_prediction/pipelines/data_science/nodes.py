@@ -110,8 +110,3 @@ def train_model(X_train: pd.DataFrame, y_train: pd.Series, hyperparameters: List
     classifier.fit(X_train, y_train)
 
     return classifier
-
-def predict(classifier,X_val:pd.DataFrame):
-        predictions = classifier.predict(X_val)
-        predictions_proba = classifier.predict_proba(X_val)
-        return predictions, predictions_proba
