@@ -2,11 +2,9 @@
 This is a boilerplate pipeline 'data_science'
 generated using Kedro 0.19.5
 """
-import logging
 from typing import List, Dict
 
 import pandas as pd
-import numpy as np
 
 from lightgbm import LGBMClassifier
 
@@ -26,14 +24,20 @@ def optimize_model(
     Optimizes hyperparameters for a LightGBM model using Bayesian optimization.
 
     Args:
-        X_train (pd.DataFrame): The input DataFrame containing the features for training.
-        X_val (pd.DataFrame): The input DataFrame containing the features for validation.
-        y_train (pd.Series): The input Series containing the target variable for training.
-        y_val (pd.Series): The input Series containing the target variable for validation.
-        parameters (Dict): A dictionary containing the parameters used for optimization.
+        X_train (pd.DataFrame): The input DataFrame containing the features
+        for training.
+        X_val (pd.DataFrame): The input DataFrame containing the features
+        for validation.
+        y_train (pd.Series): The input Series containing the target variable
+        for training.
+        y_val (pd.Series): The input Series containing the target variable
+        for validation.
+        parameters (Dict): A dictionary containing the parameters used for
+        optimization.
 
     Returns:
-        List: A list containing the best hyperparameters found by the optimization process.
+        List: A list containing the best hyperparameters found by
+        the optimization process.
     """
 
     def tune_lgbm(params):
@@ -107,9 +111,12 @@ def train_model(
     Trains a LightGBM model on the input training data.
 
     Args:
-        X_train (pd.DataFrame): The input DataFrame containing the features for training.
-        y_train (pd.Series): The input Series containing the target variable for training.
-        hyperparameters (List): A list of hyperparameters for the LightGBM model.
+        X_train (pd.DataFrame): The input DataFrame containing the features
+        for training.
+        y_train (pd.Series): The input Series containing the target variable
+        for training.
+        hyperparameters (List): A list of hyperparameters for the
+        LightGBM model.
 
     Returns:
         LGBMClassifier: The trained LightGBM classifier.

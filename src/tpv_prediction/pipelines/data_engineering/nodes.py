@@ -2,9 +2,7 @@
 This is a boilerplate pipeline 'data_processing'
 generated using Kedro 0.19.5
 """
-
-import logging
-from typing import Dict, Tuple, List
+from typing import Dict, Tuple
 
 import pandas as pd
 import numpy as np
@@ -15,11 +13,14 @@ from sklearn.model_selection import train_test_split
 
 def preprocess_data(data: pd.DataFrame, parameters: Dict):
     """
-    Preprocesses the input DataFrame `data` according to the specified `parameters`.
+    Preprocesses the input DataFrame `data` according to the
+    specified `parameters`.
 
     Args:
-        data (pd.DataFrame): The input DataFrame containing the data to be processed.
-        parameters (Dict): A dictionary containing the parameters used for data processing.
+        data (pd.DataFrame): The input DataFrame containing the data to
+        be processed.
+        parameters (Dict): A dictionary containing the parameters
+        used for data processing.
 
     Returns:
         pd.DataFrame: The preprocessed DataFrame.
@@ -53,9 +54,11 @@ def preprocess_data(data: pd.DataFrame, parameters: Dict):
 
     data["target_class"] = np.select(conditions, values)
     data = data.drop(columns=parameters["target"])
-    data[parameters["categorical_list"]] = data[parameters["categorical_list"]].astype(
+    data[parameters["categorical_list"]] = data[parameters[
+        "categorical_list"]].astype(
         "category"
     )
+
     data["target_class"] = data["target_class"].astype("category")
 
     return data, le
@@ -66,8 +69,10 @@ def split_data(data: pd.DataFrame, parameters: Dict) -> Tuple:
     Splits the input DataFrame `data` into training and validation sets.
 
     Args:
-        data (pd.DataFrame): The input DataFrame containing the data to be split.
-        parameters (Dict): A dictionary containing the parameters used for splitting.
+        data (pd.DataFrame): The input DataFrame containing the data to
+        be split.
+        parameters (Dict): A dictionary containing the parameters used
+        for splitting.
 
     Returns:
         Tuple: A tuple containing X_train, X_val, y_train, and y_val.
@@ -78,9 +83,10 @@ def split_data(data: pd.DataFrame, parameters: Dict) -> Tuple:
 
     stratified = parameters["stratify"]
 
-    if stratified == True:
+    if stratified is True:
         X_train, X_val, y_train, y_val = train_test_split(
-            X, y, train_size=parameters["val_frac"], random_state=42, stratify=y
+            X, y, train_size=parameters["val_frac"], random_state=42,
+            stratify=y
         )
     else:
         X_train, X_val, y_train, y_val = train_test_split(

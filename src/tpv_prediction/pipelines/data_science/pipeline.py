@@ -8,7 +8,8 @@ def create_pipeline(**kwargs) -> Pipeline:
         [
             node(
                 func=optimize_model,
-                inputs=["X_train", "X_val", "y_train", "y_val", "params:model_options"],
+                inputs=["X_train", "X_val", "y_train", "y_val",
+                        "params:model_options"],
                 outputs="hyperparameters",
                 name="optimize_model_node",
             ),

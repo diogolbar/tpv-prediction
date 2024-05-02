@@ -1,14 +1,12 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import (
-    classification_report,
     confusion_matrix,
     accuracy_score,
     precision_score,
     recall_score,
     f1_score,
 )
-from typing import Any, Dict
 import pandas as pd
 from lightgbm import LGBMClassifier
 
@@ -17,7 +15,8 @@ def create_classification_dashboard(
     classifier: LGBMClassifier, X_val: pd.DataFrame, y_val: pd.Series
 ) -> plt.Figure:
     """
-    Create a dashboard for monitoring a multi-class classification machine learning classifier.
+    Create a dashboard for monitoring a multi-class classification
+    machine learning classifier.
 
     Args:
         classifier: Trained LGBMClassifier classifier.
@@ -33,13 +32,10 @@ def create_classification_dashboard(
     predictions = classifier.predict(X_val)
     predictions_proba = classifier.predict_proba(X_val)
 
-    # Classification Report
-    report = classification_report(y_val, predictions, output_dict=True)
-    report_df = pd.DataFrame(report).transpose()
-
     # Confusion Matrix
     cm = confusion_matrix(y_val, predictions)
-    fig, axs = plt.subplots(2, 2 + predictions_proba.shape[1], figsize=(20, 15))
+    fig, axs = plt.subplots(
+        2, 2 + predictions_proba.shape[1], figsize=(20, 15))
 
     sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", ax=axs[0, 0])
     axs[0, 0].set_title("Confusion Matrix")
@@ -71,11 +67,14 @@ def create_classification_dashboard(
     if predictions_proba is not None:
         # Add class names to the predictions_proba DataFrame
         class_names = [f"Class {i}" for i in range(predictions_proba.shape[1])]
-        predictions_proba_df = pd.DataFrame(predictions_proba, columns=class_names)
+        predictions_proba_df = pd.DataFrame(
+            predictions_proba, columns=class_names)
 
         for i in range(predictions_proba_df.shape[1]):
-            sns.histplot(predictions_proba_df.iloc[:, i], ax=axs[1, i + 2], kde=True)
-            axs[1, i + 2].set_title(f"Class {i} Predicted Probabilities Distribution")
+            sns.histplot(
+                predictions_proba_df.iloc[:, i], ax=axs[1, i + 2], kde=True)
+            axs[1, i +
+                2].set_title(f"Class {i} Predicted Probabilities Distribution")
             axs[1, i + 2].set_xlabel("Probability")
             axs[1, i + 2].set_ylabel("Frequency")
 
